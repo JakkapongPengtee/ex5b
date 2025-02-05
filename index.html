@@ -32,27 +32,24 @@
 	</div>
 	
 	<script>
-		function validate(){
+		function validate(t){
 			if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
 					alert(msg);
-					return;
+					return false;
 			   }
 			   if(!(t >= -100 && t <= 100)){
 					msg = "Tempurature entered (in Celsius) must be between 0 and 100 C'";
 					alert(msg);
-					return;
+					return false;
 			   }
+			   return true;
 		}
-	    $(document).ready(function(){
-			$("button").click(function(){
-			   var t = $('#temp').val();//celsius
-			   var u = $('#unit').val();
-			   			   
-			   var t1;
-			   var u1;
-			   
-			   if(u == "F"){
+
+		function convert(t,u){
+			var t1;
+			var u1;
+			if(u == "F"){
 					t1 = t * (9/5) + 32;
 					u1 = "Fahrenheit";
 			   }else if(u == "K"){
@@ -62,8 +59,19 @@
 					t1 = t * (4/5);
 					u1 = "Kelvin";
 			   }
+			   return{"t1":t1,"u1": u1};
 			   
-			   alert("Temperature is "+t1+" in "+u1);
+		}
+	    $(document).ready(function(){
+			$("button").click(function(){
+			   var t = parseFloat($('#temp').val());//celsius
+			   var u = $('#unit').val();
+
+			   if (!validate(t)) return;
+			   			   			   			   
+			   var result = convert(t,u);
+			   
+			   alert("Temperature is "+ result.t1 +" in "+ result.u1);
 			});
 		});
 	</script>
