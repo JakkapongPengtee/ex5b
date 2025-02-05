@@ -32,6 +32,7 @@
 	</div>
 	
 	<script>
+
 		function validate(t){
 			if(isNaN(t)){
 					msg = "Please verify whether the temperature value is correct!!!";
@@ -62,6 +63,7 @@
 			   return{"t1":t1,"u1": u1};
 			   
 		}
+		
 	    $(document).ready(function(){
 			$("button").click(function(){
 			   var t = parseFloat($('#temp').val());//celsius
